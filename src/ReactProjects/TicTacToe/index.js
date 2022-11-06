@@ -1,5 +1,5 @@
 import React from "react";
-import Logic from "./helper";
+import Logic from "./utils";
 import { Tile, Board } from "./styles";
 
 const TicTacToe = () => {
