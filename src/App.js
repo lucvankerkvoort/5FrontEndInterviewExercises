@@ -1,9 +1,9 @@
-import TicTacToe from "./ReactProjects/TicTacToe";
+import StarRating from "./ReactProjects/StarRating";
 
 function App() {
   return (
     <div className="App">
-      <TicTacToe />
+      <StarRating />
     </div>
   );
 }
