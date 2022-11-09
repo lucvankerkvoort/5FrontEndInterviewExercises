@@ -1,56 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./styles.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bitcoin</title>
   </head>
-  <body>
-    <div id="root"></div>
-
-    <script>
-      let creation = new Array(5).fill("black");
-      let clicked = -1;
-
-      let root = document.getElementById("root");
-
-      const stars = creation.map((item, i) => {
-        let star = document.createElement("div");
-        star.style.background = item;
-        star.classList.add("star");
-
-        star.addEventListener("mouseenter", () => {
-          settingStars(i);
-        });
-
-        star.addEventListener("click", () => {
-          clicked = i;
-        });
-
-        root.append(star);
-
-        return star;
-      });
-
-      const settingStars = (index) => {
-        for (let i = 0; i < stars.length; i++) {
-          if (index >= i) {
-            stars[i].style.background = "#feb614";
-          } else {
-            stars[i].style.background = "black";
-          }
-        }
-      };
-
-      root.addEventListener("mouseleave", (e) => {
-        if (clicked > 0) {
-          settingStars();
-        }
-      });
-
-      console.log({ stars });
-    </script>
-  </body>
+  <body></body>
 </html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="score"></div>
+    <div id="messages"></div>
+
+    <script>
+      let userScore = 0;
+      let compScore = 0;
+      let rounds = 5;
+      let message = "";
+      let restart = false;
+      let compSelection;
+
+      const root = document.getElementById("root");
+      const score = document.getElementById("score");
+      const messages = document.getElementById("messages");
+      let comp = document.createElement("p");
+
+      score.innerHTML = `rounds: ${rounds} , user score: ${userScore}, comp score = ${compScore}`;
+
+      const options = ["Rock", "Paper", "Scissors"];
+
+      const userBlocks = options.map((item, i) => {
+        const button = document.createElement("button");
+        button.innerHTML = item;
+        button.addEventListener("click", () => game(item));
+
+        root.append(button);
+      });
+
+      const game = (userSelection) => {
+        if (restart) return;
+
+        rounds--;
+
+        const random = Math.floor(Math.random() * options.length);
+        compSelection = options[random];
+        comp.innerHTML = compSelection;
+
+        const combinations = {
+          Rock: "Scissors",
+          Paper: "Rock",
+          Scissors: "Paper",
+        };
+
+        if (userSelection === compSelection) {
+          message = "its a Tie";
+          messages.innerHTML = message;
+          score.innerHTML = `rounds: ${rounds} user score: ${userScore}, comp score = ${compScore}`;
+          return winner();
+        }
+
+        if (combinations[userSelection] === compSelection) {
+          userScore++;
+          message = "You won this round";
+        } else {
+          compScore++;
+          message = "You lost this round, better luck next time";
+        }
+
+        messages.innerHTML = message;
+        score.innerHTML = `rounds: ${rounds} user score: ${userScore}, comp score = ${compScore}`;
+        return winner();
+      };
+
+      root.append(comp);
+
+      const winner = () => {
+        console.log("I run", rounds);
+        if (rounds > 0) return;
+
+        console.log("Im done");
+        restart = true;
+
+        const restartButton = document.createElement("button");
+        restartButton.id = "restartButton";
+        restartButton.innerHTML = "restart";
+        restartButton.addEventListener("click", (e) => {
+          console.log(e.target.value);
+          userScore = 0;
+          compScore = 0;
+          rounds = 5;
+          message = "";
+          restart = false;
+          compSelection = null;
+
+          comp.innerHTML = compSelection;
+
+          messages.innerHTML = message;
+          score.innerHTML = `rounds: ${rounds} user score: ${userScore}, comp score = ${compScore}`;
+          restartButton.remove();
+          return;
+        });
+        document.body.append(restartButton);
+
+        if (userScore === compScore) {
+          message = `It's a Tie`;
+          return (messages.innerHTML = message);
+        }
+
+        userScore > compScore
+          ? (message = "You Won!!!")
+          : (message = "You Lose !!");
+        return (messages.innerHTML = message);
+      };
+    </script>
+  </body>
+</html>

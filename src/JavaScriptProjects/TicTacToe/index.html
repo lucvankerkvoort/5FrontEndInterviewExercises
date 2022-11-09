@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const root = document.getElementById("root");
+      let winner = null;
+      let board = new Array(9).fill("");
+      let isX = true;
+
+      const hasAWinner = (square) => {
+        const lines = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+        ];
+
+        for (let i = 0; i < lines.length; i++) {
+          const [a, b, c] = lines[i];
+
+          if (square[a] && square[a] === square[b] && square[a] === square[c]) {
+            const winnerParagraph = document.createElement("p");
+            winnerParagraph.innerHTML = `The winner is ${square[a]}`;
+            root.append(winnerParagraph);
+
+            return (winner = square[a]);
+          }
+        }
+      };
+
+      const move = (index) => {
+        const square = document.getElementById(index);
+
+        if (!!square.innerHTML || winner) return;
+
+        board[index] = isX ? "X" : "O";
+        square.innerHTML = isX ? "X" : "O";
+        isX = !isX;
+        hasAWinner(board);
+      };
+
+      board.map((item, i) => {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        square.id = i;
+        square.innerHTML = item;
+        square.addEventListener("click", () => move(i));
+
+        root.append(square);
+      });
+    </script>
+  </body>
+</html>

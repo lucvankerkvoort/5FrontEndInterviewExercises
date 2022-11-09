@@ -1,0 +1,15 @@
+#root {
+  margin: 50px auto;
+  display: grid;
+  height: 500px;
+  width: 500px;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.square {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+}

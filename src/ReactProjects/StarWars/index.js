@@ -34,7 +34,7 @@ const StarWars = () => {
       >
         <table>
           <tr>
-            <th>Add/Remove</th>
+            <th>Remove</th>
             <th>Person</th>
             <th>Individual Data</th>
           </tr>

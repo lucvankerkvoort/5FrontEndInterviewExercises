@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Wars</title>
+  </head>
+  <body>
+    <table id="root">
+      <tr>
+        <th>Remove</th>
+        <th>Person</th>
+        <th>Individual Data</th>
+      </tr>
+    </table>
+    <button id="remove">remove</button>
+    <script>
+      const root = document.getElementById("root");
+      let toBeRemoved = [];
+      let personUrl = "";
+      const response = fetch("https://www.swapi.tech/api/people")
+        .then((response) => response.json())
+        .then((data) => setTable(data.results));
+
+      document
+        .getElementById("remove")
+        .addEventListener("click", () => remove());
+      const remove = () => {
+        console.log(toBeRemoved);
+        toBeRemoved.forEach((item) => {
+          const removeableItem = document.getElementById(item);
+          removeableItem.remove();
+        });
+        toBeRemoved = [];
+      };
+      const setTable = (data) => {
+        data.map(({ uid, name, url }) => {
+          const tableRow = document.createElement("tr");
+          tableRow.id = uid;
+
+          const remove = document.createElement("td");
+          const radioButton = document.createElement("input");
+          radioButton.value = uid;
+          radioButton.type = "radio";
+          radioButton.addEventListener("change", (e) =>
+            toBeRemoved.push(e.target.value)
+          );
+          remove.append(radioButton);
+
+          const nameData = document.createElement("td");
+          nameData.innerHTML = name;
+
+          const getData = document.createElement("td");
+          const getDataButton = document.createElement("button");
+          getDataButton.innerHTML = "Get Data";
+          getDataButton.addEventListener("click", () => getPerson(url));
+          getData.append(getDataButton);
+
+          tableRow.append(remove, nameData, getData);
+          root.append(tableRow);
+        });
+      };
+
+      const getPerson = (url) => {
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => showcasePerson(data.result.properties));
+      };
+
+      const showcasePerson = (data) => {
+        console.log({ data });
+        const table = document.createElement("table");
+
+        const tableHeaders = document.createElement("tr");
+        for (const char in data) {
+          const removed_ = char.replace("_", " ");
+          const capitalized = capitalizeFirstLetter(removed_);
+          const tableData = document.createElement("td");
+
+          tableData.innerHTML = capitalized;
+          tableHeaders.append(tableData);
+        }
+
+        table.append(tableHeaders);
+        const values = Object.values(data);
+
+        const tableRowData = document.createElement("tr");
+        for (let value of values) {
+          const tableData = document.createElement("td");
+
+          tableData.innerHTML = value;
+
+          tableRowData.append(tableData);
+        }
+        table.append(tableRowData);
+
+        document.body.append(table);
+      };
+
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+birth_year,
+        eye_color,
+        gender,
+        hair_color,
+        height,
+        homeworld,
+        mass,
+        name,
+        skin_color, -->
