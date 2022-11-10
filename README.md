@@ -1,3 +1,75 @@
+# Front End Interview Coding Exercises
+
+I have created this repository as an exercise for myself and others to help cement the knowledge necessary
+to get a job as a React front end developer.
+
+I have taken out 5 different interview questions I have been asked in real life to build.
+Here is a rundown of the different questions
+
+## Bitcoin API
+
+Prerequisites
+
+- API Url ("https://api.coinbase.com/v2/prices/BTC-USD/buy")
+- additional metrics:
+  authorization:
+  "Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c",
+
+I had to build a button that once clicked does the API call to get the latest bitcoin price
+Then the consequitive clicks would set the new price to be the current price and the old price to be the previous price
+I had 20 min to build this.
+
+## Rock Paper Scissors
+
+Prerequisites
+
+- You are allowed to use React
+- You need to finish within 45 min
+
+Build Rock Paper Scissors from scratch.
+There are 5 rounds, at the end of each round it needs to show who won.
+After 5 rounds a message should appear showcasing who won the match.
+With a tie nobody gets points, it is just a loss of a round.
+
+## Star Rating
+
+Prerequisites
+
+- You can only use HTML, CSS, JavaScript
+- You cannot run your code for testing purposes
+- Build it within 30 minutes.
+
+Build a star rating application that is modular and can be used anywhere.
+When you hover on the stars they should fill in but only when you click should it saved.
+As soon as you remove your mouse it should either be blank or go back to the last value captured.
+
+## Star Wars
+
+Prerequisites
+
+- API URL (https://www.swapi.tech/api/people)
+- finish within 20 min
+
+Make an API call to the URL, showcase the data in a table.
+The first column of the table should have some form of selection to be removed.
+A button that will remove the selected rows.
+The second column will be the characters name
+The third and last column will be a button to get specific data about a character
+that should be displayed underneath the existing table in a different table.
+
+## Build Tic Tac Toe
+
+Prerequisites
+
+- You are allowed to use React
+- You need to finish within 45 min
+
+I had to build Tic Tac Toe from scratch in React.
+For this exercise I had also built it in HTML, CSS and JavaScript.
+Bigger companies such as Amazon will ask you to build these kind UI's in HTML, CSS and JavaScript
+
+I have done solutions in both React as well as HTML, CSS and JavaScript.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
