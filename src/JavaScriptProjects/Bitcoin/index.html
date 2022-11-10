@@ -6,5 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bitcoin</title>
   </head>
-  <body></body>
+  <body>
+    <button onclick="fetchBitcoin()">Grab Bitcoin</button>
+    <p id="current"></p>
+    <p id="previous"></p>
+    <script>
+      const availableData = [];
+      let current = "";
+      let previous = "";
+      const setData = (data) => {
+        if (availableData.length > 2) {
+          availableData.shift();
+        }
+
+        availableData.push(data);
+
+        if (availableData.length < 2) {
+          const [currentData] = availableData;
+          return (document.getElementById(
+            "current"
+          ).innerHTML = `Current Price: ${currentData}`);
+        }
+        const [previousData, currentData] = availableData;
+        current = currentData;
+        previous = previousData;
+
+        document.getElementById(
+          "current"
+        ).innerHTML = `Current Price: ${currentData}`;
+
+        document.getElementById(
+          "previous"
+        ).innerHTML = `Previous Price: ${previousData}`;
+      };
+
+      const fetchBitcoin = () => {
+        const response = fetch(
+          "https://api.coinbase.com/v2/prices/BTC-USD/buy",
+          {
+            method: "GET",
+            authorization:
+              "Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c",
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => setData(data.data.amount));
+      };
+    </script>
+  </body>
 </html>
