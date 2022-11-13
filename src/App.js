@@ -1,9 +1,9 @@
-import StarRating from "./ReactProjects/StarRating";
+import Bitcoin from "./ReactProjects/Bitcoin";
 
 function App() {
   return (
     <div className="App">
-      <StarRating />
+      <Bitcoin />
     </div>
   );
 }

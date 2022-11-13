@@ -7,40 +7,44 @@
     <title>Bitcoin</title>
   </head>
   <body>
-    <button onclick="fetchBitcoin()">Grab Bitcoin</button>
+    <button style="background-color: blue" onclick="fetchBitcoin()">
+      Grab Bitcoin
+    </button>
     <p id="current"></p>
     <p id="previous"></p>
     <script>
       const availableData = [];
-      let current = "";
-      let previous = "";
+
       const setData = (data) => {
         if (availableData.length > 2) {
-          availableData.shift();
+          availableData.pop();
         }
 
-        availableData.push(data);
+        availableData.unshift(data);
 
-        if (availableData.length < 2) {
-          const [currentData] = availableData;
-          return (document.getElementById(
-            "current"
-          ).innerHTML = `Current Price: ${currentData}`);
-        }
-        const [previousData, currentData] = availableData;
-        current = currentData;
-        previous = previousData;
+        const [currentData, previousData] = availableData;
 
         document.getElementById(
           "current"
         ).innerHTML = `Current Price: ${currentData}`;
 
-        document.getElementById(
-          "previous"
-        ).innerHTML = `Previous Price: ${previousData}`;
+        if (previousData) {
+          document.getElementById(
+            "previous"
+          ).innerHTML = `Previous Price: ${previousData}`;
+        }
+      };
+
+      const changeColor = () => {
+        const button = document.querySelector("button");
+
+        if (button.style.backgroundColor === "purple") return;
+
+        button.style.backgroundColor = "purple";
       };
 
       const fetchBitcoin = () => {
+        changeColor();
         const response = fetch(
           "https://api.coinbase.com/v2/prices/BTC-USD/buy",
           {
@@ -50,7 +54,7 @@
           }
         )
           .then((response) => response.json())
-          .then((data) => setData(data.data.amount));
+          .then(({ data: { amount } }) => setData(amount));
       };
     </script>
   </body>
